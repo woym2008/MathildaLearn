@@ -14,7 +14,9 @@ public class GameRunState : IState
 
     public void Enter()
     {
-        throw new System.NotImplementedException();
+        GameObject.Find("AnimalController");
+
+        _Controller = GameObject.Find("Picker").GetComponent<PickController>();
     }
 
     public void Excute(float dt)

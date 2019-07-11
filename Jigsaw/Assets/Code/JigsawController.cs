@@ -3,7 +3,12 @@ using System.Collections;
 
 public class JigsawController : MonoBehaviour
 {
-    public AnimalController ParentController;
+    public AnimalController ParentControllerœ;
+
+    public Vector3 RightPosition;
+
+    public Vector3 CurrentPosition;
+
     // Use this for initialization
     void Start()
     {
@@ -14,5 +19,15 @@ public class JigsawController : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void OnSelect()
+    {
+        this.transform.localScale = new Vector3(1.1f,1.1f,1f);
+    }
+
+    public void OnUnSelect()
+    {
+        this.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 }
