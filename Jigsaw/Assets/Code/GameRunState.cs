@@ -5,7 +5,9 @@ public class GameRunState : IState
 {
     FSM _fsm;
 
-    PickController _Controller;
+    PickController _PickController;
+
+    AnimalController _AnimController;
 
     public GameRunState(FSM fsm)
     {
@@ -14,18 +16,24 @@ public class GameRunState : IState
 
     public void Enter()
     {
-        GameObject.Find("AnimalController");
+        //_AnimController = GameObject.Find("Animal").GetComponent<AnimalController>();
+        _AnimController = GameObject.FindWithTag("Animal").GetComponent<AnimalController>();
 
-        _Controller = GameObject.Find("Picker").GetComponent<PickController>();
+        _PickController = GameObject.Find("Picker").GetComponent<PickController>();
+
+        _AnimController.OnFinishGame = OnFinish;
     }
 
     public void Excute(float dt)
     {
-        throw new System.NotImplementedException();
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
+    }
+
+    void OnFinish()
+    {
+        _fsm.State = new GameFinishState(_fsm);
     }
 }

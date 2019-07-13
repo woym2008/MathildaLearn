@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    FSM _fsm;
+
+    private void Awake()
+    {
+        _fsm = new FSM();
+        _fsm.State = new GameRunState(_fsm);
+    }
     // Start is called before the first frame update
     void Start()
     {

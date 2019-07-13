@@ -18,6 +18,8 @@ public class PickController : MonoBehaviour
 
     bool _IsMousePressed;
 
+    public float AdsorbentDis = 1.0f;
+
     InputState _state;
     // Use this for initialization
     void Start()
@@ -69,14 +71,18 @@ public class PickController : MonoBehaviour
                             {
                                 var jcotrl = hit.collider.gameObject.GetComponent<JigsawController>();
 
-                                if (_cacheJigsaw != null)
+                                if(jcotrl.CanPick())
                                 {
-                                    _cacheJigsaw.OnUnSelect();
+                                    if (_cacheJigsaw != null)
+                                    {
+                                        _cacheJigsaw.OnUnSelect();
+                                    }
+
+                                    _cacheJigsaw = jcotrl;
+
+                                    _cacheJigsaw.OnSelect(AdsorbentDis);
                                 }
 
-                                _cacheJigsaw = jcotrl;
-
-                                _cacheJigsaw.OnSelect();
                             }
                         }
                     }
@@ -89,6 +95,8 @@ public class PickController : MonoBehaviour
                         var newpos = new Vector3(_camera.transform.position.x + pos.x, _camera.transform.position.y + pos.y, _cacheJigsaw.transform.position.z);
 
                         _cacheJigsaw.transform.position = newpos;
+
+                        _cacheJigsaw.OnDrag();
                     }
 
 
