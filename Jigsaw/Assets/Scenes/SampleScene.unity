@@ -383,8 +383,8 @@ Camera:
   m_GameObject: {fileID: 534669902}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.7372549, g: 0.65882355, b: 0.56078434, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -454,7 +454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839241586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24, y: 0.35, z: 0}
+  m_LocalPosition: {x: -0.79, y: 2.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1013,7 +1013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 092eec01382d8c74683b72996f1f46b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 2.53
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 092eec01382d8c74683b72996f1f46b9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1128,5 +1128,25 @@ PrefabInstance:
       propertyPath: CenterPoint
       value: 
       objectReference: {fileID: 839241587}
+    - target: {fileID: 9090386939253094818, guid: 092eec01382d8c74683b72996f1f46b9,
+        type: 3}
+      propertyPath: Offset.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090386939253094818, guid: 092eec01382d8c74683b72996f1f46b9,
+        type: 3}
+      propertyPath: Offset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090386939253094818, guid: 092eec01382d8c74683b72996f1f46b9,
+        type: 3}
+      propertyPath: Bias.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090386939253094818, guid: 092eec01382d8c74683b72996f1f46b9,
+        type: 3}
+      propertyPath: Bias.y
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 092eec01382d8c74683b72996f1f46b9, type: 3}
