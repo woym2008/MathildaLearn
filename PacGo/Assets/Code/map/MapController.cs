@@ -18,6 +18,7 @@ public class MapController : MonoBehaviour
 
     [SerializeField]
     public List<TileData> _tiles = new List<TileData>();
+    public List<GameObject> _beans = new List<GameObject>();
 
     //每个格子的size
     public Vector2 wallsize = new Vector2(1,1);
@@ -151,5 +152,22 @@ public class MapController : MonoBehaviour
     private void OnDestroy()
     {
         //tiledata = null;
+    }
+
+    public void DestroyMap()
+    {
+        foreach(var t in _tiles)
+        {
+            GameObject.Destroy(t.TileObj);
+        }
+        _tiles.Clear();
+        foreach(var b in _beans)
+        {
+            if(b != null)
+            {
+                Destroy(b);
+            }
+        }
+        _beans.Clear();
     }
 }
