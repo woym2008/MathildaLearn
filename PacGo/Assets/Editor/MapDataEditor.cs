@@ -10,12 +10,16 @@ public class MapDataEditor : Editor
     public string test;
 
     public MapTile tile;
+
+    bool addmaptile;
     
     private void OnEnable()
     {
         mapdata = (MapData)target;
 
         tile = Resources.Load<MapTile>("tile/" + mapdata.tilename);
+
+        addmaptile = false;
     }
 
     public override void OnInspectorGUI()
@@ -23,9 +27,14 @@ public class MapDataEditor : Editor
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
 
-        tile = EditorGUILayout.ObjectField(tile,typeof(MapTile),false,null) as MapTile;
-        if(tile != null)
-            mapdata.tilename = tile.name;
+        addmaptile = EditorGUILayout.Toggle("AddMapTile",addmaptile);
+        if(addmaptile)
+        {
+            tile = EditorGUILayout.ObjectField(tile, typeof(MapTile), false, null) as MapTile;
+            if (tile != null)
+                mapdata.tilename = tile.name;
+        }
+
 
         //mapdata.datastr = EditorGUILayout.TextArea(mapdata.datastr);
         int row = mapdata.row;
@@ -44,7 +53,7 @@ public class MapDataEditor : Editor
             EditorGUILayout.BeginHorizontal();
             for (int j = 0; j < mapdata.column; ++j)
             {
-                mapdata.data[i * column + j] = EditorGUILayout.IntField(mapdata.data[i* column + j]);
+                //mapdata.data[i * column + j] = EditorGUILayout.IntField(mapdata.data[i* column + j]);
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -59,10 +68,11 @@ public class MapDataEditor : Editor
                 EditorGUILayout.BeginHorizontal();
                 for (int j = 0; j < mapdata.column; ++j)
                 {
-                    mapdata.data[i * column + j] = EditorGUILayout.IntField(mapdata.data[i * column + j]);
+                    //mapdata.data[i * column + j] = EditorGUILayout.IntField(mapdata.data[i * column + j]);
 
+                    var index = mapdata.data[i * column + j];
 
-                    mapdata.data[i * column + j] = EditorGUILayout.IntPopup(mapdata.data[i * column + j], tile.TileNames, tile.TileIndex);
+                    mapdata.data[i * column + j] = EditorGUILayout.IntPopup(index, tile.TileNames, tile.TileIndex);
                 }
                 EditorGUILayout.EndHorizontal();
             }

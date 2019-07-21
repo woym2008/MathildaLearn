@@ -26,6 +26,6 @@ public class MapTile : ScriptableObject
     public string[] TileNames;
     [SerializeField]
     public int[] TileIndex;
-
+    [SerializeField]
     public int NumTile;
 }

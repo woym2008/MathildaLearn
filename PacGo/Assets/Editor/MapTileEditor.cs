@@ -39,6 +39,7 @@ public class MapTileEditor : Editor
             maptile.TileIndex = new int[numTile];
 
             maptile.NumTile = numTile;
+
         }
 
         for(int i=0;i< numTile;++i)
