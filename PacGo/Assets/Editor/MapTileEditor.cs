@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(MapTile))]
 public class MapTileEditor : Editor
@@ -29,6 +30,9 @@ public class MapTileEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
+        serializedObject.Update();
+
         EditorGUILayout.BeginVertical();
 
         var numTile = EditorGUILayout.IntField(TileNumStr, maptile.NumTile);
@@ -37,7 +41,10 @@ public class MapTileEditor : Editor
             maptile.TileNames = new string[numTile];
 
             maptile.TileIndex = new int[numTile];
-
+            if(numTile == 0)
+            {
+                Debug.LogError("numTile == 0");
+            }
             maptile.NumTile = numTile;
 
         }
@@ -50,5 +57,8 @@ public class MapTileEditor : Editor
             EditorGUILayout.EndHorizontal();
         }
         EditorGUILayout.EndVertical();
+
+        serializedObject.ApplyModifiedProperties();
+
     }
 }

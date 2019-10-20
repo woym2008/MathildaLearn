@@ -9,8 +9,9 @@ public class MapData : ScriptableObject
     //地图文件中保存的是数值而不是二维数组
     [SerializeField]
     public int[] data;
-
+    [SerializeField]
     public int row;
+    [SerializeField]
     public int column;
 
     //存一个使用的tile配置表的名字
@@ -31,5 +32,12 @@ public class MapData : ScriptableObject
 
             return data[index];
         }
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log("enter MapData");
+        Debug.Log("mapdata row: " + row);
+        Debug.Log("mapdata column" + column);
     }
 }

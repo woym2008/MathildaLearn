@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe054f94d86321b4d99474cb6d642429, type: 3}
   m_Name: Map001
   m_EditorClassIdentifier: 
-  datastr: 
+  data: 010000000100000002000000020000000100000002000000020000000200000002000000
+  row: 3
+  column: 3
+  tilename: Tiles

@@ -17,36 +17,65 @@ public class MapDataEditor : Editor
     {
         mapdata = (MapData)target;
 
-        tile = Resources.Load<MapTile>("tile/" + mapdata.tilename);
+        //tile = Resources.Load<MapTile>("tile/" + mapdata.tilename);
 
         addmaptile = false;
+
+        Debug.Log("enter MapDataEditor onenable" + mapdata.row);
     }
 
     public override void OnInspectorGUI()
     {
+        serializedObject.Update();
+        base.OnInspectorGUI();
+
         EditorGUILayout.BeginVertical();
         EditorGUILayout.Space();
 
         addmaptile = EditorGUILayout.Toggle("AddMapTile",addmaptile);
         if(addmaptile)
         {
+            tile = Resources.Load<MapTile>("tile/" + mapdata.tilename);
             tile = EditorGUILayout.ObjectField(tile, typeof(MapTile), false, null) as MapTile;
             if (tile != null)
                 mapdata.tilename = tile.name;
-        }
 
+            int row = mapdata.row;
+            int column = mapdata.column;
+            row = EditorGUILayout.IntField("Row:", mapdata.row);
+            column = EditorGUILayout.IntField("Column:", mapdata.column);
+            if (mapdata.data == null || row != mapdata.row || column != mapdata.column)
+            {
+                mapdata.data = new int[row * column];
+            }
+            mapdata.row = row;
+            mapdata.column = column;
+
+
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+
+            if (tile != null)
+            {
+                for (int i = 0; i < mapdata.row; ++i)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    for (int j = 0; j < mapdata.column; ++j)
+                    {
+                        //mapdata.data[i * column + j] = EditorGUILayout.IntField(mapdata.data[i * column + j]);
+
+                        var index = mapdata.data[i * column + j];
+
+                        mapdata.data[i * column + j] = EditorGUILayout.IntPopup(index, tile.TileNames, tile.TileIndex);
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+        }
+        //Debug.Log("enter MapDataEditor OnInspectorGUI");
 
         //mapdata.datastr = EditorGUILayout.TextArea(mapdata.datastr);
-        int row = mapdata.row;
-        int column = mapdata.column;
-        row = EditorGUILayout.IntField("Row:", mapdata.row);
-        column = EditorGUILayout.IntField("Column:", mapdata.column);
-        if (mapdata.data == null || row != mapdata.row || column != mapdata.column)
-        {
-            mapdata.data = new int[row * column];
-        }
-        mapdata.row = row;
-        mapdata.column = column;
+
 
         for (int i=0;i< mapdata.row; ++i)
         {
@@ -58,27 +87,15 @@ public class MapDataEditor : Editor
             EditorGUILayout.EndHorizontal();
         }
 
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
-        if (tile != null)
+        if (addmaptile)
         {
-            for (int i = 0; i < mapdata.row; ++i)
-            {
-                EditorGUILayout.BeginHorizontal();
-                for (int j = 0; j < mapdata.column; ++j)
-                {
-                    //mapdata.data[i * column + j] = EditorGUILayout.IntField(mapdata.data[i * column + j]);
 
-                    var index = mapdata.data[i * column + j];
 
-                    mapdata.data[i * column + j] = EditorGUILayout.IntPopup(index, tile.TileNames, tile.TileIndex);
-                }
-                EditorGUILayout.EndHorizontal();
-            }
         }
-        
 
         EditorGUILayout.EndVertical();
+
+        serializedObject.ApplyModifiedProperties();
+
     }
 }
